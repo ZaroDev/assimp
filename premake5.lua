@@ -3,20 +3,19 @@ kind "StaticLib"
 language "C++"
 cppdialect "C++17"
 
-targetdir("bin/" .. outputdir .. "/%{prj.name}")
-objdir("bin-int/" .. outputdir .. "/%{prj.name}")
+targetdir("%{wks.location}/Binaries/" .. outputdir .. "/%{prj.name}")
+objdir("%{wks.location}/Binaries/Intermediates/" .. outputdir .. "/%{prj.name}")
 
-defines { -- "SWIG",
-"ASSIMP_BUILD_NO_OWN_ZLIB", "ASSIMP_BUILD_NO_X_IMPORTER", "ASSIMP_BUILD_NO_3DS_IMPORTER",
+defines { -- "SWIG", 
+"ASSIMP_BUILD_NO_EXPORT", "ASSIMP_BUILD_NO_OWN_ZLIB", "ASSIMP_BUILD_NO_X_IMPORTER", "ASSIMP_BUILD_NO_3DS_IMPORTER",
 "ASSIMP_BUILD_NO_MD3_IMPORTER", "ASSIMP_BUILD_NO_MDL_IMPORTER", "ASSIMP_BUILD_NO_MD2_IMPORTER",
--- "ASSIMP_BUILD_NO_PLY_IMPORTER",
-"ASSIMP_BUILD_NO_ASE_IMPORTER", -- "ASSIMP_BUILD_NO_OBJ_IMPORTER",
+"ASSIMP_BUILD_NO_PLY_IMPORTER", "ASSIMP_BUILD_NO_ASE_IMPORTER", "ASSIMP_BUILD_NO_OBJ_IMPORTER",
 "ASSIMP_BUILD_NO_AMF_IMPORTER", "ASSIMP_BUILD_NO_HMP_IMPORTER", "ASSIMP_BUILD_NO_SMD_IMPORTER",
 "ASSIMP_BUILD_NO_MDC_IMPORTER", "ASSIMP_BUILD_NO_MD5_IMPORTER", "ASSIMP_BUILD_NO_STL_IMPORTER",
 "ASSIMP_BUILD_NO_LWO_IMPORTER", "ASSIMP_BUILD_NO_DXF_IMPORTER", "ASSIMP_BUILD_NO_NFF_IMPORTER",
 "ASSIMP_BUILD_NO_RAW_IMPORTER", "ASSIMP_BUILD_NO_OFF_IMPORTER", "ASSIMP_BUILD_NO_AC_IMPORTER",
 "ASSIMP_BUILD_NO_BVH_IMPORTER", "ASSIMP_BUILD_NO_IRRMESH_IMPORTER", "ASSIMP_BUILD_NO_IRR_IMPORTER",
-"ASSIMP_BUILD_NO_Q3D_IMPORTER", "ASSIMP_BUILD_NO_B3D_IMPORTER", -- "ASSIMP_BUILD_NO_COLLADA_IMPORTER",
+"ASSIMP_BUILD_NO_Q3D_IMPORTER", "ASSIMP_BUILD_NO_B3D_IMPORTER", "ASSIMP_BUILD_NO_COLLADA_IMPORTER",
 "ASSIMP_BUILD_NO_TERRAGEN_IMPORTER", "ASSIMP_BUILD_NO_CSM_IMPORTER", "ASSIMP_BUILD_NO_3D_IMPORTER",
 "ASSIMP_BUILD_NO_LWS_IMPORTER", "ASSIMP_BUILD_NO_OGRE_IMPORTER", "ASSIMP_BUILD_NO_OPENGEX_IMPORTER",
 "ASSIMP_BUILD_NO_MS3D_IMPORTER", "ASSIMP_BUILD_NO_COB_IMPORTER", "ASSIMP_BUILD_NO_BLEND_IMPORTER",
@@ -43,19 +42,10 @@ defines { -- "SWIG",
 "ASSIMP_BUILD_NO_SPLITBYBONECOUNT_PROCESS", "ASSIMP_BUILD_NO_DEBONE_PROCESS", "ASSIMP_BUILD_NO_EMBEDTEXTURES_PROCESS",
 "ASSIMP_BUILD_NO_GLOBALSCALE_PROCESS"}
 
-files {"include/**", "code/Assimp.cpp", "code/BaseImporter.cpp", "code/ColladaLoader.cpp", "code/ColladaParser.cpp",
-       "code/CreateAnimMesh.cpp", "code/PlyParser.cpp", "code/PlyLoader.cpp", "code/BaseProcess.cpp",
-       "code/EmbedTexturesProcess.cpp", "code/ConvertToLHProcess.cpp", "code/DefaultIOStream.cpp",
-       "code/DefaultIOSystem.cpp", "code/DefaultLogger.cpp", "code/GenVertexNormalsProcess.cpp", "code/Importer.cpp",
-       "code/ImporterRegistry.cpp", "code/MaterialSystem.cpp", "code/PostStepRegistry.cpp", "code/ProcessHelper.cpp",
-       "code/scene.cpp", "code/ScenePreprocessor.cpp", "code/ScaleProcess.cpp", "code/SGSpatialSort.cpp",
-       "code/SkeletonMeshBuilder.cpp", "code/SpatialSort.cpp", "code/TriangulateProcess.cpp",
-       "code/ValidateDataStructure.cpp", "code/Version.cpp", "code/VertexTriangleAdjacency.cpp",
-       "code/ObjFileImporter.cpp", "code/ObjFileMtlImporter.cpp", "code/ObjFileParser.cpp", "code/glTFImporter.cpp",
-       "code/glTF2Importer.cpp", "code/MakeVerboseFormat.cpp", "code/CalcTangentsProcess.cpp", "code/ScaleProcess.cpp",
-       "code/EmbedTexturesProcess.cpp", "contrib/irrXML/*"}
+files {"include/**", "code/**", "contrib/irrXML/*"}
 
-includedirs {"include", "contrib/irrXML", "contrib/zlib", "contrib/rapidjson/include"}
+includedirs {"", "include", "code", "contrib", "contrib/utf8cpp/source", "contrib/irrXML", "contrib/zlib",
+             "contrib/rapidjson/include", "contrib/pugixml/src", "contrib/unzip"}
 
 filter "system:windows"
 systemversion "latest"
